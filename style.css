@@ -1,0 +1,505 @@
+/* CSS Variables for Pop Entertainment Theme */
+:root {
+    --primary: #FF4081; /* Pinkish Red */
+    --primary-hover: #E91E63;
+    --secondary: #FFC107; /* Amber/Yellow */
+    --text-main: #1F2937;
+    --text-muted: #6B7280;
+    --bg-light: #F3F4F6;
+    --panel-bg: rgba(255, 255, 255, 0.98);
+    --panel-border: #E5E7EB;
+    --panel-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-light);
+    overflow: hidden; /* Full screen map */
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+    font-weight: 800; /* Bolder for pop style */
+    letter-spacing: -0.02em;
+}
+
+h1 {
+    font-size: 2.2rem;
+    color: var(--primary);
+    text-shadow: 2px 2px 0px #FFC107; /* Fun pop shadow */
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Layout */
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+/* Base Panel */
+.glass-panel {
+    background: var(--panel-bg);
+    border: 3px solid var(--panel-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--panel-shadow);
+    z-index: 1000;
+}
+
+/* Header */
+.main-header {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    padding: 1.5rem 2rem;
+    min-width: 350px;
+    border-color: #fce4ec;
+}
+
+/* Debug / Admin Controls */
+.debug-panel {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: 3px solid #2196F3;
+    border-radius: var(--radius-md);
+    background: white;
+}
+
+.debug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.debug-header h4 {
+    color: #2196F3;
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(33, 150, 243, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(33, 150, 243, 0); }
+}
+
+.control-group {
+    margin-bottom: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.control-group label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+select {
+    background: #F9FAFB;
+    color: #333;
+    border: 2px solid #E5E7EB;
+    padding: 0.5rem;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Spot Detail Panel (Aside) */
+#spot-panel {
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    right: 2rem;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    border: 4px solid var(--secondary); /* Bold border */
+}
+
+#spot-panel.hidden {
+    transform: translateX(110%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border: 2px solid #E5E7EB;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 800;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.close-btn:hover {
+    background: #FFEB3B;
+    transform: scale(1.1);
+}
+
+.spot-hero {
+    position: relative;
+    height: 220px;
+    flex-shrink: 0;
+}
+
+.spot-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Bright gradient overlay */
+.spot-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.spot-title-wrapper {
+    position: absolute;
+    bottom: 1rem;
+    left: 1.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.spot-title-wrapper h2 {
+    color: #111;
+    font-size: 1.8rem;
+    text-shadow: 1px 1px 0px white, -1px -1px 0px white, 1px -1px 0px white, -1px 1px 0px white; /* Outline */
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    background: #9E9E9E;
+    color: white;
+    align-self: flex-start;
+    box-shadow: 0 4px 0px rgba(0,0,0,0.1);
+}
+
+.status-badge.unlocked {
+    background: #4CAF50;
+    color: white;
+}
+
+.spot-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.spot-content::-webkit-scrollbar {
+    width: 8px;
+}
+.spot-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.spot-content::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 4px;
+}
+
+.distance-info {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #F3F4F6;
+    border: 2px dashed #9CA3AF;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    color: #374151;
+}
+
+#spot-distance {
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: var(--primary);
+}
+
+.interaction-area {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #E5E7EB;
+}
+
+.locked-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #FEF2F2;
+    border: 2px dashed #FCA5A5;
+    padding: 1.5rem;
+    border-radius: 16px;
+    color: #B91C1C;
+    gap: 1rem;
+    font-weight: 700;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    background: white;
+    border: 2px solid #D1D5DB;
+    border-radius: 12px;
+    color: #111;
+    padding: 1rem;
+    font-family: inherit;
+    font-weight: 600;
+    resize: none;
+    margin: 1rem 0;
+    transition: all 0.2s;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(255, 64, 129, 0.2);
+}
+
+/* Buttons */
+.primary-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 0 6px 0px #C2185B, 0 10px 20px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.primary-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(2px);
+    box-shadow: 0 4px 0px #C2185B, 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.primary-btn:active {
+    transform: translateY(6px);
+    box-shadow: 0 0px 0px #C2185B, 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 0.8rem;
+    background: white;
+    color: #03A9F4;
+    border: 2px solid #03A9F4;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 0px #0288D1;
+    transition: all 0.1s;
+}
+
+.secondary-btn:hover {
+    background: #E1F5FE;
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px #0288D1;
+}
+
+/* Comments Area */
+.comments-section h3 {
+    margin-top: 1.5rem;
+    color: #374151;
+    border-bottom: 3px solid #FFC107;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.comments-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment-card {
+    background: white;
+    border: 2px solid #E5E7EB;
+    border-left: 6px solid var(--secondary);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.comment-date {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #9CA3AF;
+    margin-bottom: 0.4rem;
+}
+
+.comment-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1F2937;
+}
+
+/* Custom Leaflet overrides */
+.leaflet-popup-content-wrapper {
+    background: white;
+    color: #333;
+    border: 3px solid var(--primary);
+    border-radius: 16px;
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.leaflet-popup-tip {
+    background: white;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+/* Event Banner */
+.event-banner {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2rem;
+    border: 3px solid #FFC107;
+    border-radius: 50px;
+    background: white;
+    width: auto;
+    white-space: nowrap;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes bounceIn {
+    0% { transform: translateX(-50%) translateY(50px); opacity: 0; }
+    100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+}
+
+.event-info strong {
+    color: #E91E63;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.badge {
+    background: #00E676;
+    color: #111;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    margin-left: 0.8rem;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: white;
+    border: 4px solid var(--primary);
+    box-shadow: 0 20px 50px rgba(255, 64, 129, 0.2);
+    width: 500px;
+    max-width: 90%;
+    position: relative;
+    padding: 3rem;
+    text-align: center;
+    border-radius: 24px;
+    transform: scale(1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.hidden .modal-content {
+    transform: scale(0.8) translateY(50px);
+}
+
+.q-text {
+    font-size: 1.3rem !important;
+    color: #333 !important;
+    font-weight: 800;
+    margin: 1.5rem 0;
+}
